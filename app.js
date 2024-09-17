@@ -14,6 +14,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+const Listing = require("./models/listing.js");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
@@ -79,7 +80,10 @@ app.use((req, res, next) => {
     res.locals.currUser = req.user;
     next();
 });
-
+app.get("/", async (req, res) => {
+    const allListings = await Listing.find({});
+    res.render("listings/index.ejs", {allListings});
+})
 app.get("/demouser", async (req, res) => {
     let fakeUser = new User({
         email: "student@gmail.com",
