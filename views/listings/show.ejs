@@ -114,7 +114,8 @@
 
 <script>
     const mapToken = "<%= process.env.MAP_TOKEN %>";
-    const coordinates = JSON.parse("<%- JSON.stringify(listing.geometry.coordinates) %>");
+    let coordinates = JSON.parse("<%- JSON.stringify(listing.geometry.coordinates) %>");
+    console.log("Updated Coordinates: ", coordinates);
     const locationMap = "<%= listing.title%>"
     mapboxgl.accessToken = mapToken;
     const map = new mapboxgl.Map({
